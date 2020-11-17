@@ -20,7 +20,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Lint with flake8
-        run: flake8 .
+        run: flake8 . --ignore=E1,E23,W503,E501,W291,W391,W605 --exclude=./tests/
 
       - name: Test with pytest
         run: pytest tests/
