@@ -1,6 +1,7 @@
 .git/*
 env/
 venv/
+yambd_venv
 .venv
 .venv/
 
