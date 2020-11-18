@@ -2,6 +2,8 @@ version: "3.8"
 
 volumes:
   postgres_data:
+  static_volume:
+
 
 services:
   db:
@@ -10,20 +12,24 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
-  app:
+  web:
     image: raikirixd/yamdb_final:latest
     restart: always
+    command: >
+      bash -c "python manage.py migrate && python manage.py collectstatic --no-input && gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - static_volume:/code/static
     ports:
-      - "8000:8000"
+      - 8000:8000
     depends_on:
       - db
     env_file:
       - ./.env
-  web:
+  nginx:
     build: ./nginx
     volumes:
-      - static:/home/code/static
+      - static_volume:/code/static
     ports:
-    - '80:80'
+      - 80:80
     depends_on:
-      - app
+      - web
