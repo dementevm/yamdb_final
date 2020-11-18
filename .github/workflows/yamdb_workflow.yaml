@@ -71,7 +71,7 @@ jobs:
             rm .env
             touch .env
             echo ${{ secrets.DB_ENGINE }} >> .env && echo ${{ secrets.DB_NAME }} >> .env && echo ${{ secrets.POSTGRES_USER }} >> .env && echo ${{ secrets.POSTGRES_PASSWORD }} >> .env && echo ${{ secrets.DB_HOST }} >> .env && echo ${{ secrets.DB_PORT }} >> .env 
-            sudo docker-compose up -d
+            sudo docker-compose up
             sudo docker cp ~/.env $USER_web_1:~/code
   send_message:
     runs-on: ubuntu-latest
