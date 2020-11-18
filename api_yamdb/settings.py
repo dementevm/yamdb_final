@@ -1,6 +1,5 @@
 import os
 from datetime import timedelta
-from django.conf.global_settings import AUTHENTICATION_BACKENDS
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
