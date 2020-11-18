@@ -1,3 +1,3 @@
 FROM nginx:stable
-COPY default.conf /etc/nginx/conf.d
-CMD sudo ufw allow 'Nginx Full' && sudo ufw allow OpenSSH && sudo ufw enable
+RUN rm /etc/nginx/conf.d/default.conf
+COPY yamdb.conf /etc/nginx/conf.d
