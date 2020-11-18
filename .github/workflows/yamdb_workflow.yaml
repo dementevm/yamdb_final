@@ -58,7 +58,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "docker-compose.yaml, nginx"
-          target: "~/"
+          target: "~/yamdb_final"
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
@@ -67,12 +67,12 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            cd ~/
+            cd ~/yamdb_final
             rm .env
             touch .env
             echo ${{ secrets.DB_ENGINE }} >> .env && echo ${{ secrets.DB_NAME }} >> .env && echo ${{ secrets.POSTGRES_USER }} >> .env && echo ${{ secrets.POSTGRES_PASSWORD }} >> .env && echo ${{ secrets.DB_HOST }} >> .env && echo ${{ secrets.DB_PORT }} >> .env 
             sudo docker-compose up -d
-            
+          
   #          sudo docker cp ~/.env $USER_web_1:~/code
   send_message:
     runs-on: ubuntu-latest
