@@ -57,9 +57,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            cd yamdb
-            sudo docker-compose pull web
-            sudo docker-compose up --force-recreate -d web
+            sudo docker pull raikirixd/yamdb_final:latest
+            sudo docker stop $(sudo docker ps -a -q)
+            sudo docker run --rm -d -p 5000:5000 raikirixd/yamdb_final:latest
               
   send_message:
     runs-on: ubuntu-latest
