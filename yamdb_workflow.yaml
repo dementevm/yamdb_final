@@ -71,6 +71,9 @@ jobs:
             rm .env
             touch .env
             echo ${{ secrets.DB_ENGINE }} >> .env && echo ${{ secrets.DB_NAME }} >> .env && echo ${{ secrets.POSTGRES_USER }} >> .env && echo ${{ secrets.POSTGRES_PASSWORD }} >> .env && echo ${{ secrets.DB_HOST }} >> .env && echo ${{ secrets.DB_PORT }} >> .env
+            sudo docker pull raikirixd/yamdb_final:latest
+            sudo docker-compose stop
+            sudo docker-compose rm web -f
             sudo docker-compose up -d
             sudo docker cp .env yamdb_final_web_1:/code
   send_message:
